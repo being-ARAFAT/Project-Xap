@@ -264,88 +264,135 @@ input,select,textarea{font-family:inherit}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ═══════════════════════════════════════════════════════════
-   ① HOME PAGE
+   ① HOME PAGE — DYNAMIC ISLAND
 ═══════════════════════════════════════════════════════════ */
-.island-wrap{padding:12px 16px 0;position:sticky;top:0;z-index:700}
+.island-wrap{
+  position:sticky;top:0;z-index:700;
+  padding:10px 14px 0;
+}
 .island{
-  background:var(--glass);border:1px solid var(--glass-b);
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.55);
   backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  border-radius:var(--r-xl);padding:10px 14px;
-  display:flex;align-items:center;gap:12px;
-  box-shadow:var(--sh-lg);
+  border-radius:var(--r-xl);
+  padding:9px 12px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08),0 1px 0 rgba(255,255,255,.55) inset;
+  transition:background .3s,border-color .3s;
+}
+[data-theme="dark"] .island{
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 8px 32px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.04) inset;
 }
 .i-av{
-  width:44px;height:44px;border-radius:50%;
-  border:2.5px solid var(--y);flex-shrink:0;
+  width:42px;height:42px;border-radius:50%;
+  border:2px solid var(--y);flex-shrink:0;
   background:var(--y-soft);display:flex;align-items:center;justify-content:center;
-  font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--y-dark);
+  font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:var(--y-dark);
+  box-shadow:0 0 0 3px rgba(245,197,24,.18);
 }
-[data-theme="dark"] .i-av{color:var(--y)}
+[data-theme="dark"] .i-av{color:var(--y);box-shadow:0 0 0 3px rgba(245,197,24,.12)}
 .i-info{flex:1;min-width:0}
-.i-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.i-meta{font-size:11px;color:var(--ts);display:flex;align-items:center;gap:8px;margin-top:2px}
-.streak-pill{display:flex;align-items:center;gap:3px;background:var(--y-soft);border:1px solid var(--y-border);border-radius:var(--r-pill);padding:2px 8px;font-size:11px;font-weight:700;color:var(--y-dark)}
+.i-name{font-family:'Sora',sans-serif;font-size:13.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+.i-meta{font-size:11px;color:var(--ts);display:flex;align-items:center;gap:7px;margin-top:2px;flex-wrap:nowrap}
+.i-class{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.streak-pill{display:inline-flex;align-items:center;gap:3px;background:var(--y-soft);border:1px solid var(--y-border);border-radius:var(--r-pill);padding:2px 7px;font-size:10.5px;font-weight:700;color:var(--y-dark);flex-shrink:0}
 [data-theme="dark"] .streak-pill{color:var(--y)}
-.streak-pill .mi{font-size:13px}
-.i-search{width:38px;height:38px;border-radius:50%;background:var(--surf2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ts);transition:all .2s;flex-shrink:0;cursor:pointer}
-.i-search:hover{background:var(--y);color:#000}
+.streak-pill .mi{font-size:12px}
+/* island right-side action buttons */
+.i-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.i-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--surf2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ts);transition:all .2s;cursor:pointer;flex-shrink:0;
+}
+.i-btn:hover{background:var(--y);color:#000;border-color:var(--y);transform:scale(1.05)}
+.i-btn:active{transform:scale(.94)}
+.i-btn .mi{font-size:18px}
 
-/* Banner */
-.banner-outer{margin-top:14px;position:relative;height:164px;overflow:hidden}
-.banner-fade-l,.banner-fade-r{position:absolute;top:0;bottom:0;width:52px;z-index:2;pointer-events:none}
-.banner-fade-l{left:0;background:linear-gradient(to right,var(--bg),transparent)}
-.banner-fade-r{right:0;background:linear-gradient(to left,var(--bg),transparent)}
-.banner-track{display:flex;gap:12px;height:100%;padding:0 16px;animation:bScroll 22s linear infinite;width:max-content}
+/* Banner — image only, no text overlay */
+.banner-outer{margin-top:12px;position:relative;height:162px;overflow:hidden}
+.banner-fade-l,.banner-fade-r{position:absolute;top:0;bottom:0;width:56px;z-index:2;pointer-events:none}
+.banner-fade-l{left:0;background:linear-gradient(to right,var(--bg) 0%,transparent 100%)}
+.banner-fade-r{right:0;background:linear-gradient(to left,var(--bg) 0%,transparent 100%)}
+.banner-track{display:flex;gap:12px;height:100%;padding:6px 16px;animation:bScroll 28s linear infinite;width:max-content}
 .banner-track:hover{animation-play-state:paused}
 @keyframes bScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.banner-item{width:268px;height:148px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;cursor:pointer;position:relative;box-shadow:var(--sh-md);transition:transform .2s;margin-top:8px}
-.banner-item:hover{transform:scale(1.025)}
-.banner-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px}
-.banner-lbl{position:absolute;bottom:9px;left:9px;right:9px;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);border-radius:var(--r-sm);padding:5px 10px}
+.banner-item{width:260px;height:150px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;cursor:pointer;position:relative;box-shadow:var(--sh-md);transition:transform .22s,box-shadow .22s}
+.banner-item:hover{transform:scale(1.028);box-shadow:var(--sh-lg)}
+.banner-item:active{transform:scale(.98)}
+/* full-bleed image — no overlay text */
+.banner-img{width:100%;height:100%;object-fit:cover;display:block}
+/* gradient tile (fallback when no real image) */
+.banner-tile{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:54px}
 
-/* Quick Grid */
+/* Quick Access — strict 1:1 squares */
 .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.q-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 8px 13px;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;box-shadow:var(--sh-sm);transition:all .22s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;aspect-ratio:1}
-.q-card::after{content:'';position:absolute;inset:0;background:var(--y-glow);opacity:0;transition:opacity .22s}
-.q-card:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--sh-md)}
-.q-card:hover::after{opacity:1}
-.q-card:active{transform:scale(.97)}
-.q-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--y-soft);border:1px solid var(--y-border);display:flex;align-items:center;justify-content:center;color:var(--y-dark)}
+.q-card{
+  background:var(--surf);border:1px solid var(--border);border-radius:var(--r-md);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;box-shadow:var(--sh-sm);
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s,background .2s;
+  position:relative;overflow:hidden;
+  aspect-ratio:1/1;padding:0;
+}
+.q-card::before{content:'';position:absolute;inset:0;background:var(--y-glow);opacity:0;transition:opacity .22s;border-radius:inherit}
+.q-card:hover{transform:translateY(-4px) scale(1.05);box-shadow:var(--sh-md)}
+.q-card:hover::before{opacity:1}
+.q-card:hover .q-icon{transform:scale(1.08)}
+.q-card:active{transform:scale(.96)}
+.q-icon{width:42px;height:42px;border-radius:var(--r-sm);background:var(--y-soft);border:1px solid var(--y-border);display:flex;align-items:center;justify-content:center;color:var(--y-dark);transition:transform .2s;flex-shrink:0}
 [data-theme="dark"] .q-icon{color:var(--y)}
-.q-icon .mi{font-size:22px}
-.q-lbl{font-size:12px;font-weight:600;color:var(--ts);text-align:center}
+.q-icon .mi{font-size:21px}
+.q-lbl{font-size:11.5px;font-weight:700;color:var(--ts);text-align:center;line-height:1.2;padding:0 6px}
 
-/* LB card */
-.lb-card .lb-top3{display:flex;align-items:flex-end;justify-content:center;padding:22px 16px 14px;background:linear-gradient(160deg,var(--y-soft),var(--surf));border-bottom:1px solid var(--border)}
-.lb-pod{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;cursor:pointer;transition:transform .2s}
-.lb-pod:hover{transform:translateY(-3px)}
-.lb-pod.p1{order:2}.lb-pod.p2{order:1}.lb-pod.p3{order:3}
-.lb-av-w{position:relative}
+/* Leaderboard — compact horizontal card */
+.lb-compact-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+.lb-card-header{display:flex;align-items:center;justify-content:space-between;padding:13px 16px 8px}
+.lb-card-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;display:flex;align-items:center;gap:7px}
+.lb-season-pill{display:inline-flex;align-items:center;gap:4px;background:var(--y-soft);border:1px solid var(--y-border);border-radius:var(--r-pill);padding:3px 9px;font-size:10.5px;font-weight:700;color:var(--y-dark)}
+[data-theme="dark"] .lb-season-pill{color:var(--y)}
+/* horizontal scroll */
+.lb-h-list{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding:2px 12px 10px;border-bottom:1px solid var(--border)}
+.lb-h-list::-webkit-scrollbar{display:none}
+.lb-h-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;cursor:pointer;padding:6px 8px;border-radius:var(--r-md);transition:background .18s,transform .18s}
+.lb-h-item:hover{background:var(--surf2);transform:translateY(-2px)}
+.lb-h-item:active{transform:scale(.95)}
+.lb-h-av{width:44px;height:44px;border-radius:50%;background:var(--surf2);border:2.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--ts);position:relative;flex-shrink:0;transition:border-color .2s}
+.lb-h-item.is-me .lb-h-av{border-color:var(--y);background:var(--y-soft);color:var(--y-dark)}
+[data-theme="dark"] .lb-h-item.is-me .lb-h-av{color:var(--y)}
+.lb-h-item.r1 .lb-h-av{border-color:#F5C518;width:50px;height:50px;font-size:18px}
+.lb-h-item.r2 .lb-h-av{border-color:#C0C0C0}
+.lb-h-item.r3 .lb-h-av{border-color:#CD7F32}
+.lb-h-rbadge{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);font-size:8.5px;font-weight:800;padding:1px 6px;border-radius:var(--r-pill);white-space:nowrap;line-height:1.5}
+.lb-h-item.r1 .lb-h-rbadge{background:#F5C518;color:#000}
+.lb-h-item.r2 .lb-h-rbadge{background:#C0C0C0;color:#000}
+.lb-h-item.r3 .lb-h-rbadge{background:#CD7F32;color:#fff}
+.lb-h-item.is-me .lb-h-rbadge{background:var(--y);color:#000}
+.lb-h-name{font-size:10.5px;font-weight:700;color:var(--ts);max-width:52px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;margin-top:4px}
+.lb-h-pts{font-size:9.5px;color:var(--tm);font-weight:500;text-align:center}
+.lb-h-you{font-size:8px;font-weight:800;color:var(--y-dark);text-transform:uppercase;letter-spacing:.06em}
+[data-theme="dark"] .lb-h-you{color:var(--y)}
+/* my rank bar */
+.lb-my-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--y-soft);border-bottom:1px solid var(--y-border)}
+.lb-my-rank-num{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--y-dark);min-width:42px;text-align:center}
+[data-theme="dark"] .lb-my-rank-num{color:var(--y)}
+.lb-my-info{flex:1}
+.lb-my-label{font-size:10px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.lb-my-name{font-size:13.5px;font-weight:800;color:var(--tp)}
+.lb-my-pts{font-size:11.5px;color:var(--ts);margin-top:1px}
+.lb-my-delta{font-size:12px;font-weight:800;color:var(--ok);display:flex;align-items:center;gap:2px;flex-shrink:0}
+.lb-my-delta .mi{font-size:15px}
+/* view all */
+.lb-view-all{width:100%;padding:12px;text-align:center;font-size:13px;font-weight:700;color:var(--y-dark);cursor:pointer;transition:background .18s;display:flex;align-items:center;justify-content:center;gap:6px}
+[data-theme="dark"] .lb-view-all{color:var(--y)}
+.lb-view-all:hover{background:var(--y-soft)}
+.lb-view-all .mi{font-size:15px}
+
+/* keep old lb classes for full-leaderboard slide page */
 .lb-av{width:52px;height:52px;border-radius:50%;background:var(--surf2);border:3px solid var(--surf3);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:19px;font-weight:800;color:var(--ts)}
-.lb-pod.p1 .lb-av{width:64px;height:64px;border-color:var(--y);font-size:22px}
-.lb-pod.p2 .lb-av{border-color:#C0C0C0}
-.lb-pod.p3 .lb-av{border-color:#CD7F32}
-.lb-badge{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:800;padding:1px 7px;border-radius:var(--r-pill)}
-.lb-pod.p1 .lb-badge{background:var(--y);color:#000}
-.lb-pod.p2 .lb-badge{background:#C0C0C0;color:#000}
-.lb-pod.p3 .lb-badge{background:#CD7F32;color:#fff}
-.lb-name{font-size:12px;font-weight:600;text-align:center;max-width:76px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.lb-pts{font-size:11px;color:var(--tm)}
-.lb-mine{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--y-soft);border-bottom:1px solid var(--border)}
-.lb-mine .rn{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--y-dark);width:38px;text-align:center}
-[data-theme="dark"] .lb-mine .rn{color:var(--y)}
-.lb-mine .ri{flex:1}.lb-mine .rl{font-size:11px;color:var(--tm)}.lb-mine .rnm{font-size:14px;font-weight:700}.lb-mine .rsc{font-size:12px;color:var(--ts)}
-.lb-mine .rd{font-size:12px;font-weight:700;color:var(--ok);display:flex;align-items:center;gap:2px}
-.lb-mini-list{padding:12px 18px;display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
-.lb-mini-list::-webkit-scrollbar{display:none}
-.lb-mini{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;cursor:pointer;transition:transform .18s}
-.lb-mini:hover{transform:translateY(-2px)}
-.lb-mini-av{width:36px;height:36px;border-radius:50%;background:var(--surf2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ts);font-family:'Sora',sans-serif}
-.lb-mini-rk{font-size:10px;color:var(--tm);font-weight:600}
-.lb-mini-nm{font-size:10px;color:var(--ts);max-width:44px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
-.lb-full-btn{width:100%;padding:13px;text-align:center;font-size:13px;font-weight:700;color:var(--y-dark);border-top:1px solid var(--border);cursor:pointer;transition:background .2s}
-[data-theme="dark"] .lb-full-btn{color:var(--y)}
-.lb-full-btn:hover{background:var(--y-soft)}
+/* (lb-pod styles moved into compact card block above) */
 
 /* Rec cards */
 .rec-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-md);padding:15px;min-width:186px;max-width:210px;flex-shrink:0;cursor:pointer;box-shadow:var(--sh-sm);transition:all .22s cubic-bezier(.34,1.56,.64,1)}
@@ -704,68 +751,110 @@ canvas#scoreChart{width:100% !important;height:100% !important}
 ═══════════════════════════════════ -->
 <div class="page active" id="page-home">
 
-  <!-- Dynamic Island -->
+  <!-- Dynamic Island (Home-exclusive) -->
   <div class="island-wrap">
     <div class="island">
       <div class="i-av">A</div>
       <div class="i-info">
         <div class="i-name">Arafat Rahman</div>
         <div class="i-meta">
-          HSC '27 · Science
-          <span class="streak-pill"><span class="mi material-icons-round">local_fire_department</span>14 days</span>
+          <span class="i-class">HSC '27 · Science</span>
+          <span class="streak-pill">
+            <span class="mi material-icons-round">local_fire_department</span>14 days
+          </span>
         </div>
       </div>
-      <button class="i-search" onclick="openSearch()"><span class="mi material-icons-round">search</span></button>
+      <div class="i-actions">
+        <button class="i-btn" onclick="toggleTheme()" title="Toggle theme">
+          <span class="mi material-icons-round" id="themeIconHome">dark_mode</span>
+        </button>
+        <button class="i-btn" onclick="openSearch()" title="Search">
+          <span class="mi material-icons-round">search</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Banner -->
+  <!-- Sliding Banner — image only, no text overlay -->
   <div class="banner-outer">
     <div class="banner-fade-l"></div>
     <div class="banner-fade-r"></div>
     <div class="banner-track" id="bannerTrack"></div>
   </div>
 
-  <!-- Quick Access -->
+  <!-- Quick Access — perfect 1:1 squares -->
   <div class="sec">
     <div class="sec-hd"><span class="sec-title">Quick Access</span></div>
     <div class="quick-grid">
-      <div class="q-card" onclick="goPage('exam')"><div class="q-icon"><span class="mi material-icons-round">quiz</span></div><span class="q-lbl">Exam</span></div>
-      <div class="q-card" onclick="goPage('books')"><div class="q-icon"><span class="mi material-icons-round">menu_book</span></div><span class="q-lbl">Books</span></div>
-      <div class="q-card" onclick="goPage('courses')"><div class="q-icon"><span class="mi material-icons-round">school</span></div><span class="q-lbl">Courses</span></div>
-      <div class="q-card" onclick="goPage('institutions')"><div class="q-icon"><span class="mi material-icons-round">account_balance</span></div><span class="q-lbl">Institutions</span></div>
+      <div class="q-card" onclick="goPage('exam')">
+        <div class="q-icon"><span class="mi material-icons-round">quiz</span></div>
+        <span class="q-lbl">Exam</span>
+      </div>
+      <div class="q-card" onclick="goPage('books')">
+        <div class="q-icon"><span class="mi material-icons-round">menu_book</span></div>
+        <span class="q-lbl">Books</span>
+      </div>
+      <div class="q-card" onclick="goPage('courses')">
+        <div class="q-icon"><span class="mi material-icons-round">school</span></div>
+        <span class="q-lbl">Courses</span>
+      </div>
+      <div class="q-card" onclick="goPage('institutions')">
+        <div class="q-icon"><span class="mi material-icons-round">account_balance</span></div>
+        <span class="q-lbl">Institutions</span>
+      </div>
     </div>
   </div>
 
-  <!-- Leaderboard -->
+  <!-- Leaderboard — compact horizontal card -->
   <div class="sec">
-    <div class="sec-hd"><span class="sec-title">Leaderboard</span><a class="sec-link" onclick="openPage('lbPage')">Top 100 →</a></div>
-    <div class="card">
-      <div class="lb-top3">
-        <div class="lb-pod p2"><div class="lb-av-w"><div class="lb-av">R</div><span class="lb-badge">2nd</span></div><div class="lb-name">Raihan K.</div><div class="lb-pts">9,820 pts</div></div>
-        <div class="lb-pod p1"><div class="lb-av-w"><div class="lb-av">T</div><span class="lb-badge">1st</span></div><div class="lb-name">Tanjim Hasan</div><div class="lb-pts">10,450 pts</div></div>
-        <div class="lb-pod p3"><div class="lb-av-w"><div class="lb-av">N</div><span class="lb-badge">3rd</span></div><div class="lb-name">Nusrat F.</div><div class="lb-pts">9,610 pts</div></div>
+    <div class="lb-compact-card">
+      <!-- card header -->
+      <div class="lb-card-header">
+        <div class="lb-card-title">
+          <span>🏆</span> Leaderboard
+        </div>
+        <span class="lb-season-pill">Season 3</span>
       </div>
-      <div class="lb-mine">
-        <div class="rn">#47</div>
-        <div class="ri"><div class="rl">Your Rank</div><div class="rnm">Arafat Rahman</div><div class="rsc">7,340 pts</div></div>
-        <div class="rd"><span class="mi material-icons-round">trending_up</span>+3</div>
+      <!-- horizontal scrollable student list -->
+      <div class="lb-h-list" id="homeLbHScroll"></div>
+      <!-- current user's position -->
+      <div class="lb-my-bar">
+        <div class="lb-my-rank-num">#47</div>
+        <div class="lb-my-info">
+          <div class="lb-my-label">Your Position</div>
+          <div class="lb-my-name">Arafat Rahman</div>
+          <div class="lb-my-pts">7,340 points</div>
+        </div>
+        <div class="lb-my-delta">
+          <span class="mi material-icons-round">trending_up</span>+3
+        </div>
       </div>
-      <div class="lb-mini-list" id="homeLbMini"></div>
-      <div class="lb-full-btn" onclick="openPage('lbPage')">View Full Leaderboard & Filters</div>
+      <!-- view full leaderboard -->
+      <div class="lb-view-all" onclick="openPage('lbPage')">
+        View Full Leaderboard
+        <span class="mi material-icons-round">arrow_forward</span>
+      </div>
     </div>
   </div>
 
   <!-- Subject Progress -->
   <div class="sec">
-    <div class="sec-hd"><span class="sec-title">Subject Progress</span><a class="sec-link" onclick="goPage('results')">Analytics →</a></div>
+    <div class="sec-hd">
+      <span class="sec-title">Subject Progress</span>
+      <a class="sec-link" onclick="goPage('results')">Analytics →</a>
+    </div>
     <div class="card" style="padding:16px 18px" id="homeProgressList"></div>
-    <button class="btn-secondary" style="margin-top:12px" onclick="goPage('results')"><span class="mi material-icons-round">insights</span>View Detailed Analytics</button>
+    <button class="btn-secondary" style="margin-top:12px" onclick="goPage('results')">
+      <span class="mi material-icons-round">insights</span>View Detailed Analytics
+    </button>
   </div>
 
   <!-- Recent Exams -->
   <div class="sec">
-    <div class="sec-hd"><span class="sec-title">Recent Exams</span><a class="sec-link" onclick="goPage('results')">History →</a></div>
+    <div class="sec-hd">
+      <span class="sec-title">Recent Exams</span>
+      <a class="sec-link" onclick="goPage('results')">History →</a>
+    </div>
     <div class="card" id="homeRecentExams"></div>
   </div>
 
@@ -774,6 +863,7 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <div class="sec-hd"><span class="sec-title">Recommended for You</span></div>
     <div class="h-scroll" id="homeRec"></div>
   </div>
+
 </div>
 
 <!-- ══════════════════════════════════
@@ -1028,13 +1118,20 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 document.addEventListener('keydown', e => { if(e.key==='Escape'){ document.querySelectorAll('.modal.open,.slide-page.open,.search-overlay.open').forEach(el=>el.classList.remove('open')); document.body.style.overflow=''; }});
 
 /* ═══════════════════════════════════════
-   THEME
+   THEME — synchronized across all pages
 ═══════════════════════════════════════ */
+function applyTheme(dark) {
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  const icon = dark ? 'light_mode' : 'dark_mode';
+  // sync all theme icon buttons (island + top-bars)
+  document.querySelectorAll('[id^="themeIcon"]').forEach(el => el.textContent = icon);
+  // sync profile toggle checkbox
+  const profileToggle = document.getElementById('themeToggleProfile');
+  if (profileToggle) profileToggle.checked = dark;
+  if (chartsDrawn) { chartsDrawn = false; drawCharts(); drawProfileChart(); }
+}
 function toggleTheme() {
-  const h = document.documentElement;
-  h.dataset.theme = h.dataset.theme==='dark' ? 'light' : 'dark';
-  document.querySelectorAll('[id^="themeIcon"]').forEach(el => el.textContent = h.dataset.theme==='dark' ? 'light_mode' : 'dark_mode');
-  if(chartsDrawn) { chartsDrawn=false; drawCharts(); drawProfileChart(); }
+  applyTheme(document.documentElement.dataset.theme !== 'dark');
 }
 
 /* ═══════════════════════════════════════
@@ -1117,30 +1214,87 @@ const FAQS = [
    HOME RENDERING
 ═══════════════════════════════════════ */
 function renderHome() {
-  // Banner
+  // ── Banner: image-only tiles (no text overlay) ──────────
+  // Rich gradient + emoji represents the "image" in this demo.
+  // Replace .banner-tile with <img class="banner-img" src="…"> for real images.
   const bt = document.getElementById('bannerTrack');
-  const doubled = [...BANNERS,...BANNERS];
-  bt.innerHTML = doubled.map(b=>`<div class="banner-item" style="background:${b.bg}" onclick="showToast('Opening...')"><div class="banner-bg">${b.emoji}</div><div class="banner-lbl">${b.lbl}</div></div>`).join('');
+  const doubled = [...BANNERS, ...BANNERS];
+  bt.innerHTML = doubled.map((b,idx) => `
+    <div class="banner-item" onclick="showToast('Opening promotion…')" style="cursor:pointer">
+      <div class="banner-tile" style="background:${b.bg}">
+        ${b.emoji}
+      </div>
+    </div>`).join('');
 
-  // Mini leaderboard
-  document.getElementById('homeLbMini').innerHTML = NAMES.slice(3,16).map((n,i)=>`<div class="lb-mini"><div class="lb-mini-av">${n[0]}</div><div class="lb-mini-rk">#${i+4}</div><div class="lb-mini-nm">${n.split(' ')[0]}</div></div>`).join('');
+  // ── Leaderboard horizontal scroll ──────────────────────
+  // Show top-20 + insert "You" at position #47
+  const lbItems = NAMES.slice(0, 15).map((n, i) => ({
+    n, pts: SCORES[i].toLocaleString(), rank: i + 1, isMe: false
+  }));
+  // inject "me" at logical position
+  lbItems.push({ n: 'You', pts: '7,340', rank: 47, isMe: true });
 
-  // Progress
-  document.getElementById('homeProgressList').innerHTML = SUBJECTS.map(s=>`<div class="prog-wrap"><div class="prog-hd"><div class="prog-label">${s.name}</div><span class="prog-pct">${s.pct}%</span></div><div class="prog-bg"><div class="prog-fill" style="width:${s.pct}%"></div></div></div>`).join('');
+  document.getElementById('homeLbHScroll').innerHTML = lbItems.map(item => {
+    const rClass = item.rank === 1 ? 'r1' : item.rank === 2 ? 'r2' : item.rank === 3 ? 'r3' : '';
+    const meClass = item.isMe ? 'is-me' : '';
+    const badge = (item.rank <= 3 || item.isMe) ? `<span class="lb-h-rbadge">${item.isMe ? `#${item.rank}` : item.rank === 1 ? '1st' : item.rank === 2 ? '2nd' : '3rd'}</span>` : '';
+    const youTag = item.isMe ? `<span class="lb-h-you">You</span>` : '';
+    const initials = item.n === 'You' ? 'A' : item.n[0];
+    return `
+      <div class="lb-h-item ${rClass} ${meClass}" onclick="openPage('lbPage')">
+        <div class="lb-h-av">${initials}${badge}</div>
+        <div class="lb-h-name">${item.n.split(' ')[0]}</div>
+        <div class="lb-h-pts">${item.pts}</div>
+        ${youTag}
+      </div>`;
+  }).join('');
 
-  // Recent exams
-  document.getElementById('homeRecentExams').innerHTML = RECENT_EXAMS.map(e=>`<div class="ex-row"><div class="ex-ico"><span class="mi material-icons-round">${e.icon}</span></div><div class="ex-info"><div class="ex-nm">${e.name}</div><div class="ex-mt">${e.sub} · ${e.date}</div></div><div class="ex-sc ${e.cls}">${e.score}%</div><button class="retake-btn" onclick="event.stopPropagation();showToast('Loading ${e.name}...')"><span class="mi material-icons-round">replay</span>Retake</button></div>`).join('');
+  // ── Subject Progress ────────────────────────────────────
+  document.getElementById('homeProgressList').innerHTML = SUBJECTS.map(s => `
+    <div class="prog-wrap">
+      <div class="prog-hd">
+        <div class="prog-label">
+          <span class="mi material-icons-round">radio_button_checked</span>${s.name}
+        </div>
+        <span class="prog-pct">${s.pct}%</span>
+      </div>
+      <div class="prog-bg">
+        <div class="prog-fill" style="width:${s.pct}%"></div>
+      </div>
+    </div>`).join('');
 
-  // Recommended
+  // ── Recent Exams ────────────────────────────────────────
+  document.getElementById('homeRecentExams').innerHTML = RECENT_EXAMS.map(e => `
+    <div class="ex-row">
+      <div class="ex-ico"><span class="mi material-icons-round">${e.icon}</span></div>
+      <div class="ex-info">
+        <div class="ex-nm">${e.name}</div>
+        <div class="ex-mt">${e.sub} · ${e.date}</div>
+      </div>
+      <div class="ex-sc ${e.cls}">${e.score}%</div>
+      <button class="retake-btn" onclick="event.stopPropagation();showToast('Loading ${e.name}…')">
+        <span class="mi material-icons-round">replay</span>Retake
+      </button>
+    </div>`).join('');
+
+  // ── Recommended ─────────────────────────────────────────
   const recs = [
-    {tag:'Weak Subject',tagIcon:'trending_down',ttl:'Boost Your Math Score',dsc:'Below 50% last time. Targeted practice ready.',act:'Practice Now',ai:'arrow_forward'},
-    {tag:'Daily Challenge',tagIcon:'bolt',ttl:"Today's MCQ Sprint",dsc:'30 questions · 25 min · Mixed.',act:'Start',ai:'play_arrow'},
-    {tag:'Unfinished',tagIcon:'hourglass_bottom',ttl:'Biology Chapter Test',dsc:'Stopped at Q14. 16 questions left.',act:'Continue',ai:'arrow_forward'},
-    {tag:'New Book',tagIcon:'auto_stories',ttl:'HSC Chemistry 2026',dsc:'Board textbook now in library.',act:'Open',ai:'menu_book'},
-    {tag:'Live Exam',tagIcon:'live_tv',ttl:'Physics Live — 7 PM',dsc:'Join 340+ students tonight.',act:'Register',ai:'notifications'},
-    {tag:'Course',tagIcon:'school',ttl:'HSC Math Masterclass',dsc:'Chapter 3–7 intensive.',act:'Enroll',ai:'arrow_forward'},
+    {tag:'Weak Subject', tagIcon:'trending_down', ttl:'Boost Your Math Score', dsc:'Below 50% last time. Targeted practice ready.', act:'Practice Now', ai:'arrow_forward'},
+    {tag:'Daily Challenge', tagIcon:'bolt', ttl:"Today's MCQ Sprint", dsc:'30 questions · 25 min · Mixed.', act:'Start', ai:'play_arrow'},
+    {tag:'Unfinished', tagIcon:'hourglass_bottom', ttl:'Biology Chapter Test', dsc:'Stopped at Q14. 16 questions left.', act:'Continue', ai:'arrow_forward'},
+    {tag:'New Book', tagIcon:'auto_stories', ttl:'HSC Chemistry 2026', dsc:'Board textbook now in library.', act:'Open', ai:'menu_book'},
+    {tag:'Live Exam', tagIcon:'live_tv', ttl:'Physics Live — 7 PM', dsc:'Join 340+ students tonight.', act:'Register', ai:'notifications'},
+    {tag:'Course', tagIcon:'school', ttl:'HSC Math Masterclass', dsc:'Chapter 3–7 intensive.', act:'Enroll', ai:'arrow_forward'},
   ];
-  document.getElementById('homeRec').innerHTML = recs.map(r=>`<div class="rec-card"><div class="rec-tg pill-y"><span class="mi material-icons-round">${r.tagIcon}</span>${r.tag}</div><div class="rec-ttl">${r.ttl}</div><div class="rec-dsc">${r.dsc}</div><div class="rec-ft"><div class="rec-act">${r.act}<span class="mi material-icons-round">${r.ai}</span></div></div></div>`).join('');
+  document.getElementById('homeRec').innerHTML = recs.map(r => `
+    <div class="rec-card">
+      <div class="rec-tg pill-y"><span class="mi material-icons-round">${r.tagIcon}</span>${r.tag}</div>
+      <div class="rec-ttl">${r.ttl}</div>
+      <div class="rec-dsc">${r.dsc}</div>
+      <div class="rec-ft">
+        <div class="rec-act">${r.act}<span class="mi material-icons-round">${r.ai}</span></div>
+      </div>
+    </div>`).join('');
 }
 
 /* ═══════════════════════════════════════
@@ -1376,10 +1530,19 @@ function renderProfile() {
   document.getElementById('faqList').innerHTML = FAQS.map((f,i)=>`<div class="faq-item" id="faq-${i}"><div class="faq-q" onclick="toggleFaq(${i})">${f.q}<span class="mi material-icons-round faq-chevron">expand_more</span></div><div class="faq-a">${f.a}</div></div>`).join('');
 }
 function settingRow(s) {
-  const right = s.right==='toggle'
-    ? `<label class="toggle" onclick="event.stopPropagation();toggleTheme()"><input type="checkbox" id="themeToggleProfile"><div class="toggle-slider"></div></label>`
+  const right = s.right === 'toggle'
+    ? `<label class="toggle" onclick="event.stopPropagation()">
+         <input type="checkbox" id="themeToggleProfile"
+           ${document.documentElement.dataset.theme==='dark'?'checked':''}
+           onchange="applyTheme(this.checked)">
+         <div class="toggle-slider"></div>
+       </label>`
     : `<span class="mi material-icons-round" style="color:var(--tm)">chevron_right</span>`;
-  return `<div class="setting-row" onclick="showToast('Opening ${s.nm}...')"><div class="setting-ico" style="background:${s.bg}"><span class="mi material-icons-round" style="color:${s.col}">${s.ico}</span></div><div class="setting-info"><div class="setting-nm">${s.nm}</div>${s.sub?`<div class="setting-sub">${s.sub}</div>`:''}</div><div class="setting-right">${right}</div></div>`;
+  return `<div class="setting-row" onclick="showToast('Opening ${s.nm}...')">
+    <div class="setting-ico" style="background:${s.bg}"><span class="mi material-icons-round" style="color:${s.col}">${s.ico}</span></div>
+    <div class="setting-info"><div class="setting-nm">${s.nm}</div>${s.sub?`<div class="setting-sub">${s.sub}</div>`:''}</div>
+    <div class="setting-right">${right}</div>
+  </div>`;
 }
 function toggleFaq(i) {
   const el = document.getElementById('faq-'+i);
