@@ -382,9 +382,9 @@ input,select,textarea{font-family:inherit}
 .q-card:hover::before{opacity:1}
 .q-card:hover .q-icon{transform:scale(1.08)}
 .q-card:active{transform:scale(.96)}
-.q-icon{width:42px;height:42px;border-radius:var(--r-sm);background:var(--y-soft);border:1px solid var(--y-border);display:flex;align-items:center;justify-content:center;color:var(--y-dark);transition:transform .2s;flex-shrink:0}
+.q-icon{width:42px;height:42px;border-radius:var(--r-sm);background:none;border:none;display:flex;align-items:center;justify-content:center;color:var(--y-dark);transition:transform .2s;flex-shrink:0}
 [data-theme="dark"] .q-icon{color:var(--y)}
-.q-icon .mi{font-size:21px}
+.q-icon .mi{font-size:26px}
 .q-lbl{font-size:11.5px;font-weight:700;color:var(--ts);text-align:center;line-height:1.2;padding:0 6px}
 
 /* Leaderboard — compact horizontal card */
@@ -692,7 +692,7 @@ canvas#scoreChart{width:100% !important;height:100% !important}
 /* ═══════════════════════════════════════════════════════════
    ④ PROFILE PAGE
 ═══════════════════════════════════════════════════════════ */
-.profile-hero{background:linear-gradient(160deg,#1a1a2e,#0d1b2a);padding:32px 20px 28px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.profile-hero{background:linear-gradient(160deg,#1a1a2e,#0d1b2a);padding:60px 20px 28px;text-align:center;color:#fff;position:relative;overflow:hidden}
 .profile-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% -20%,rgba(245,197,24,.2),transparent 60%)}
 .profile-av{width:84px;height:84px;border-radius:50%;border:3px solid var(--y);background:var(--y-soft);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:var(--y-dark);margin:0 auto 14px;position:relative;z-index:1}
 .profile-name{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;position:relative;z-index:1}
@@ -804,6 +804,29 @@ canvas#scoreChart{width:100% !important;height:100% !important}
 .lb-list-nm{flex:1;font-size:14px;font-weight:600}
 .lb-list-sc{font-size:13px;font-weight:700;color:var(--y-dark)}
 [data-theme="dark"] .lb-list-sc{color:var(--y)}
+.lb-list-row.is-me{background:var(--y-soft);margin:0 -16px;padding:12px 16px;border-radius:var(--r-md);border-bottom:none}
+.lb-list-row.is-me .lb-list-nm,.lb-list-row.is-me .lb-list-n{color:var(--y-dark)}
+[data-theme="dark"] .lb-list-row.is-me .lb-list-nm,[data-theme="dark"] .lb-list-row.is-me .lb-list-n{color:var(--y)}
+
+/* Podium — top 3 */
+.lb-podium{display:flex;align-items:flex-end;justify-content:center;gap:10px;padding:18px 8px 22px}
+.lb-pod-slot{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;max-width:110px}
+.lb-pod-av{width:56px;height:56px;border-radius:50%;background:var(--surf2);border:3px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--ts);position:relative}
+.lb-pod-slot.p1 .lb-pod-av{width:70px;height:70px;font-size:25px;border-color:#F5C518}
+.lb-pod-slot.p2 .lb-pod-av{border-color:#C0C0C0}
+.lb-pod-slot.p3 .lb-pod-av{border-color:#CD7F32}
+.lb-pod-medal{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000}
+.lb-pod-slot.p1 .lb-pod-medal{background:#F5C518}
+.lb-pod-slot.p2 .lb-pod-medal{background:#C0C0C0}
+.lb-pod-slot.p3 .lb-pod-medal{background:#CD7F32;color:#fff}
+.lb-pod-nm{font-size:11.5px;font-weight:700;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;margin-top:4px}
+.lb-pod-pts{font-size:10.5px;color:var(--tm);font-weight:600}
+.lb-pod-bar{width:100%;border-radius:var(--r-sm) var(--r-sm) 0 0;margin-top:8px}
+.lb-pod-slot.p1 .lb-pod-bar{height:54px;background:linear-gradient(180deg,#F5C518,#e0af0c)}
+.lb-pod-slot.p2 .lb-pod-bar{height:38px;background:linear-gradient(180deg,#D8D8D8,#C0C0C0)}
+.lb-pod-slot.p3 .lb-pod-bar{height:26px;background:linear-gradient(180deg,#D89B5F,#CD7F32)}
+
+.lb-jump-btn{position:sticky;bottom:16px;margin:16px auto 0;display:flex;align-items:center;gap:6px;justify-content:center;padding:11px 20px;border-radius:var(--r-pill);background:var(--y);color:#000;font-size:13px;font-weight:700;box-shadow:0 4px 14px rgba(245,197,24,.35);width:fit-content}
 
 /* ═══════════════════════════════════════════════════════════
    MISC
@@ -821,6 +844,32 @@ canvas#scoreChart{width:100% !important;height:100% !important}
 .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tm);padding:16px 16px 8px}
 @media(prefers-reduced-motion:reduce){.banner-track{animation:none}*{transition-duration:.01ms !important}}
 @media(max-width:480px){.subj-grid,.book-grid{grid-template-columns:repeat(2,1fr)}.stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Edit Profile modal inputs */
+.ef-label{font-size:12px;font-weight:700;color:var(--ts);margin-bottom:6px;display:block}
+.ef-group{margin-bottom:14px}
+.ef-input{
+  width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r-md);
+  padding:12px 13px;font-size:14px;font-weight:600;color:var(--tp);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.ef-input:focus{border-color:var(--y);box-shadow:0 0 0 3px var(--y-glow)}
+.ef-input::placeholder{color:var(--tm);font-weight:500}
+
+/* History sub-tabs (Exam page) */
+.hist-sub-tabs{display:flex;gap:8px;padding:2px 0 14px;overflow-x:auto;scrollbar-width:none}
+.hist-sub-tabs::-webkit-scrollbar{display:none}
+.wrong-item,.skip-item{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.wrong-item:last-child,.skip-item:last-child{border-bottom:none}
+.wrong-ico,.skip-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wrong-ico{background:rgba(239,68,68,.12);color:var(--err)}
+.skip-ico{background:rgba(245,158,11,.12);color:var(--warn)}
+.wrong-body,.skip-body{flex:1;min-width:0}
+.wrong-q,.skip-q{font-size:13px;font-weight:700;line-height:1.4}
+.wrong-meta,.skip-meta{font-size:11px;color:var(--tm);margin-top:3px}
+.wrong-ans-row{display:flex;gap:14px;margin-top:7px;font-size:11.5px}
+.wrong-ans-row .your{color:var(--err);font-weight:600}
+.wrong-ans-row .correct{color:var(--ok);font-weight:600}
 </style>
 </head>
 <body>
@@ -847,6 +896,7 @@ canvas#scoreChart{width:100% !important;height:100% !important}
       <button class="icon-btn" onclick="closePage('lbPage')"><span class="mi material-icons-round">arrow_back</span></button>
       <span class="slide-title">Leaderboard</span>
     </div>
+    <div class="lb-podium" id="lbPodium"></div>
     <div class="lb-filter-row">
       <button class="lb-f-btn active" onclick="setLbFilter(this,'Global')">Global</button>
       <button class="lb-f-btn" onclick="setLbFilter(this,'Bangladesh')">Bangladesh</button>
@@ -855,6 +905,9 @@ canvas#scoreChart{width:100% !important;height:100% !important}
       <button class="lb-f-btn" onclick="setLbFilter(this,'Monthly')">Monthly</button>
     </div>
     <div id="lbFullList"></div>
+    <div class="lb-jump-btn" onclick="jumpToMyRank()">
+      <span class="mi material-icons-round" style="font-size:16px">my_location</span>Jump to My Rank
+    </div>
   </div>
 </div>
 
@@ -866,11 +919,11 @@ canvas#scoreChart{width:100% !important;height:100% !important}
   <!-- Dynamic Island (Home-exclusive) -->
   <div class="island-wrap">
     <div class="island">
-      <div class="i-av">A</div>
+      <div class="i-av" id="islandAvatar" onclick="goPage('profile')" style="cursor:pointer" title="Profile">A</div>
       <div class="i-info">
-        <div class="i-name">Arafat Rahman</div>
+        <div class="i-name" id="islandName">Arafat Rahman</div>
         <div class="i-meta">
-          <span class="i-class">HSC '28 · Science</span>
+          <span class="i-class" id="islandClass">HSC '28 · Science</span>
           <span class="streak-pill">
             <span class="mi material-icons-round">local_fire_department</span>99 days
           </span>
@@ -879,9 +932,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
       <div class="i-actions">
         <button class="i-btn" onclick="openSearch()" title="Search">
           <span class="mi material-icons-round">search</span>
-        </button>
-        <button class="i-btn" onclick="toggleTheme()" title="Toggle theme">
-          <span class="mi material-icons-round" id="themeIconHome">light_mode</span>
         </button>
       </div>
     </div>
@@ -947,27 +997,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
         <span class="mi material-icons-round">arrow_forward</span>
       </div>
     </div>
-  </div>
-
-  <!-- Subject Progress -->
-  <div class="sec">
-    <div class="sec-hd">
-      <span class="sec-title">Subject Progress</span>
-      <a class="sec-link" onclick="goPage('results')">Analytics →</a>
-    </div>
-    <div class="card" style="padding:16px 18px" id="homeProgressList"></div>
-    <button class="btn-secondary" style="margin-top:12px" onclick="goPage('results')">
-      <span class="mi material-icons-round">insights</span>View Detailed Analytics
-    </button>
-  </div>
-
-  <!-- Recent Exams -->
-  <div class="sec">
-    <div class="sec-hd">
-      <span class="sec-title">Recent Exams</span>
-      <a class="sec-link" onclick="goPage('results')">History →</a>
-    </div>
-    <div class="card" id="homeRecentExams"></div>
   </div>
 
   <!-- Recommended -->
@@ -1221,6 +1250,29 @@ canvas#scoreChart{width:100% !important;height:100% !important}
 </div>
 
 <!-- ── REVIEW & CONFIRM MODAL ── -->
+<div class="modal" id="editProfileModal">
+  <div class="modal-sheet" style="max-width:460px">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Edit Profile</div>
+    <div class="ef-group">
+      <label class="ef-label">Full Name</label>
+      <input class="ef-input" id="efName" placeholder="Your name">
+    </div>
+    <div class="ef-group">
+      <label class="ef-label">Class · School</label>
+      <input class="ef-input" id="efSub" placeholder="e.g. HSC '28 · Science · Tejgaon Govt. High School">
+    </div>
+    <div class="ef-group">
+      <label class="ef-label">Profile Photo URL</label>
+      <input class="ef-input" id="efAvatar" placeholder="https://…  (leave blank to use initial)">
+    </div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-secondary" style="flex:1" onclick="closeModal('editProfileModal')">Cancel</button>
+      <button class="btn-primary" style="flex:2" onclick="saveEditProfile()">Save</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="confirmModal">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -1254,7 +1306,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <span class="top-bar-title">Exams</span>
     <div class="top-bar-actions">
       <button class="icon-btn" onclick="openSearch()"><span class="mi material-icons-round">search</span></button>
-      <button class="icon-btn" onclick="toggleTheme()"><span class="mi material-icons-round" id="themeIconExam">light_mode</span></button>
     </div>
   </div>
 
@@ -1267,11 +1318,12 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <div style="display:flex;flex-direction:column;gap:9px" id="liveExamList"></div>
   </div>
 
-  <!-- Subjects / Test Papers tabs -->
+  <!-- Subjects / Test Papers / History tabs -->
   <div style="margin-top:20px">
     <div class="exam-main-tabs">
-      <button class="emt active" onclick="switchExamMainTab(0,this)">📚 Subjects</button>
-      <button class="emt" onclick="switchExamMainTab(1,this)">📄 Test Papers</button>
+      <button class="emt active" onclick="switchExamMainTab(0,this)">Subjects</button>
+      <button class="emt" onclick="switchExamMainTab(1,this)">Test Papers</button>
+      <button class="emt" onclick="switchExamMainTab(2,this)">History</button>
     </div>
     <div class="exam-tab-panes">
 
@@ -1305,13 +1357,15 @@ canvas#scoreChart{width:100% !important;height:100% !important}
         </div>
       </div>
 
-    </div><!-- /exam-tab-panes -->
-  </div>
+      <!-- ── TAB 2: History ── -->
+      <div class="exam-tab-pane">
+        <div class="sec" style="margin-top:14px">
+          <div class="hist-sub-tabs" id="histSubTabs"></div>
+          <div class="card" id="histContent"></div>
+        </div>
+      </div>
 
-  <!-- Recent Attempts -->
-  <div class="sec">
-    <div class="sec-hd"><span class="sec-title">Recent Attempts</span><a class="sec-link" onclick="goPage('results')">All →</a></div>
-    <div class="card" id="examRecentList"></div>
+    </div><!-- /exam-tab-panes -->
   </div>
 </div>
 
@@ -1323,7 +1377,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <span class="top-bar-title">Results &amp; Analytics</span>
     <div class="top-bar-actions">
       <button class="icon-btn" onclick="openSearch()"><span class="mi material-icons-round">search</span></button>
-      <button class="icon-btn" onclick="toggleTheme()"><span class="mi material-icons-round">dark_mode</span></button>
     </div>
   </div>
 
@@ -1368,21 +1421,28 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <div class="card" style="padding:16px 18px" id="resultProgressList"></div>
   </div>
 
-  <!-- Exam History -->
-  <div class="sec">
-    <div class="sec-hd"><span class="sec-title">Exam History</span></div>
-    <div class="card" id="examHistoryList"></div>
-  </div>
+  <div style="height:8px"></div>
 </div>
 
 <!-- ══════════════════════════════════
      ④ PROFILE PAGE
 ═══════════════════════════════════ -->
 <div class="page" id="page-profile">
+  <div class="top-bar" style="background:transparent;border-bottom:none;position:absolute;width:100%;z-index:2">
+    <span class="top-bar-title" style="color:#fff">Profile</span>
+    <div class="top-bar-actions">
+      <button class="i-btn" onclick="toggleTheme()" title="Toggle theme">
+        <span class="mi material-icons-round" id="themeIconProfile">light_mode</span>
+      </button>
+      <button class="i-btn" onclick="openPage('settingsPage')" title="Settings">
+        <span class="mi material-icons-round">settings</span>
+      </button>
+    </div>
+  </div>
   <div class="profile-hero">
-    <div class="profile-av">A</div>
-    <div class="profile-name">Arafat Rahman</div>
-    <div class="profile-sub">HSC '28 · Science · Tejgaon Govt. High School</div>
+    <div class="profile-av" id="profileAvatar">A</div>
+    <div class="profile-name" id="profileName">Arafat Rahman</div>
+    <div class="profile-sub" id="profileSub">HSC '28 · Science · Tejgaon Govt. High School</div>
     <div class="profile-stats">
       <div class="ps-item"><div class="ps-val">14</div><div class="ps-key">Day Streak</div></div>
       <div class="ps-item"><div class="ps-val">142h</div><div class="ps-key">Study Time</div></div>
@@ -1409,23 +1469,35 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <div class="chart-wrap"><div class="chart-area"><canvas id="profileChart"></canvas></div></div>
   </div>
 
-  <!-- Settings -->
-  <div class="sec-title" style="padding:16px 16px 8px">Appearance</div>
-  <div class="card" id="appearanceSettings"></div>
-
-  <div class="sec-title" style="padding:16px 16px 8px">Account</div>
-  <div class="card" id="accountSettings"></div>
-
-  <div class="sec-title" style="padding:16px 16px 8px">Help</div>
-  <div class="card" id="helpSettings"></div>
-
-  <!-- FAQs -->
-  <div class="sec">
-    <div class="sec-hd"><span class="sec-title">FAQs</span></div>
-    <div class="card" id="faqList"></div>
-  </div>
+  <!-- Settings moved to the dedicated Settings panel (gear icon, top right) -->
 
   <div style="height:16px"></div>
+</div>
+
+<!-- ══════════════════════════════════
+     SETTINGS PANEL (full slide page)
+═══════════════════════════════════ -->
+<div class="slide-page" id="settingsPage">
+  <div class="slide-inner" style="padding-bottom:40px">
+    <div class="slide-hd">
+      <button class="icon-btn" onclick="closePage('settingsPage')"><span class="mi material-icons-round">arrow_back</span></button>
+      <span class="slide-title">Settings</span>
+    </div>
+
+    <div class="sec-title" style="padding:16px 16px 8px">Appearance</div>
+    <div class="card" id="appearanceSettings"></div>
+
+    <div class="sec-title" style="padding:16px 16px 8px">Account</div>
+    <div class="card" id="accountSettings"></div>
+
+    <div class="sec-title" style="padding:16px 16px 8px">Help</div>
+    <div class="card" id="helpSettings"></div>
+
+    <div class="sec" style="padding:0 16px">
+      <div class="sec-hd" style="padding-left:0;padding-right:0"><span class="sec-title">FAQs</span></div>
+      <div class="card" id="faqList"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════
@@ -1436,7 +1508,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <span class="top-bar-title">Library</span>
     <div class="top-bar-actions">
       <button class="icon-btn" onclick="openSearch()"><span class="mi material-icons-round">search</span></button>
-      <button class="icon-btn" onclick="toggleTheme()"><span class="mi material-icons-round">dark_mode</span></button>
     </div>
   </div>
   <div class="sec">
@@ -1455,7 +1526,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <span class="top-bar-title">Courses</span>
     <div class="top-bar-actions">
       <button class="icon-btn" onclick="openSearch()"><span class="mi material-icons-round">search</span></button>
-      <button class="icon-btn" onclick="toggleTheme()"><span class="mi material-icons-round">dark_mode</span></button>
     </div>
   </div>
   <div class="sec">
@@ -1480,7 +1550,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
     <span class="top-bar-title">Institutions</span>
     <div class="top-bar-actions">
       <button class="icon-btn" onclick="openSearch()"><span class="mi material-icons-round">search</span></button>
-      <button class="icon-btn" onclick="toggleTheme()"><span class="mi material-icons-round">dark_mode</span></button>
     </div>
   </div>
   <div class="sec">
@@ -1509,9 +1578,6 @@ canvas#scoreChart{width:100% !important;height:100% !important}
   </div>
   <div class="nav-item" data-page="books" onclick="goPage('books')">
     <span class="mi material-icons-round">menu_book</span><span class="nl">Library</span>
-  </div>
-  <div class="nav-item" data-page="profile" onclick="goPage('profile')">
-    <span class="mi material-icons-round">person</span><span class="nl">Profile</span>
   </div>
 </nav>
 
@@ -1641,9 +1707,12 @@ function showToast(msg) {
 }
 
 /* ═══════════════════════════════════════
-   DATA
+   DATA (persisted, admin-editable)
 ═══════════════════════════════════════ */
-const SUBJECTS = [
+const ER_STORE_KEY = 'er_admin_store_v1';
+const ER_PIN_KEY = 'er_admin_pin';
+
+const DEFAULT_SUBJECTS = [
   {name:'Physics',emoji:'⚛️',color:'#1a1a2e',pct:78,chapters:['Vectors & Motion','Newton\'s Laws','Work & Energy','Electricity','Waves','Optics','Modern Physics']},
   {name:'Chemistry',emoji:'🧪',color:'#0f3443',pct:62,chapters:['Atomic Structure','Periodic Table','Chemical Bonds','Thermodynamics','Organic I','Organic II','Electrochemistry']},
   {name:'Biology',emoji:'🧬',color:'#14532d',pct:85,chapters:['Cell Biology','Genetics','Photosynthesis','Respiration','Ecology','Human Anatomy','Evolution']},
@@ -1651,9 +1720,9 @@ const SUBJECTS = [
   {name:'English',emoji:'📖',color:'#44182b',pct:71,chapters:['Grammar','Reading','Writing','Vocabulary','Comprehension','Literature I','Literature II']},
   {name:'ICT',emoji:'💻',color:'#0c1445',pct:90,chapters:['Computer Basics','Networking','Programming','Database','HTML/CSS','Problem Solving','Security']},
 ];
-const NAMES = ['Tanjim H.','Raihan K.','Nusrat F.','Sakib A.','Mim R.','Fahim U.','Sadia I.','Riyad H.','Tanvir M.','Priya D.','Emon B.','Lina C.','Sajid R.','Tamal K.','Rifa T.','Sumon G.','Disha P.','Arif J.','Riya S.','Habib W.'];
-const SCORES = [10450,9820,9610,9200,8950,8810,8700,8540,8300,8100,7900,7700,7500,7350,7200,7050,6900,6750,6600,6450];
-const BANNERS = [
+const DEFAULT_NAMES = ['Tanjim H.','Raihan K.','Nusrat F.','Sakib A.','Mim R.','Fahim U.','Sadia I.','Riyad H.','Tanvir M.','Priya D.','Emon B.','Lina C.','Sajid R.','Tamal K.','Rifa T.','Sumon G.','Disha P.','Arif J.','Riya S.','Habib W.'];
+const DEFAULT_SCORES = [10450,9820,9610,9200,8950,8810,8700,8540,8300,8100,7900,7700,7500,7350,7200,7050,6900,6750,6600,6450];
+const DEFAULT_BANNERS = [
   {bg:'linear-gradient(135deg,#1a1a2e,#16213e)',emoji:'🔬',lbl:'📢 HSC Physics Live Exam — 7 PM Tonight'},
   {bg:'linear-gradient(135deg,#0f3443,#34e89e)',emoji:'📚',lbl:'📖 New: Chemistry 2026 Board Edition'},
   {bg:'linear-gradient(135deg,#4b134f,#c94b4b)',emoji:'🏆',lbl:'🏆 Season 3 Leaderboard — Now Live!'},
@@ -1661,7 +1730,7 @@ const BANNERS = [
   {bg:'linear-gradient(135deg,#1d2671,#c33764)',emoji:'🎓',lbl:'🎓 Batch A Registration Open'},
   {bg:'linear-gradient(135deg,#134e5e,#71b280)',emoji:'🧬',lbl:'🧬 Biology Model Test — Free'},
 ];
-const BOOKS = [
+const DEFAULT_BOOKS = [
   {name:'HSC Physics 2026',sub:'Class 11–12',emoji:'⚛️',color:'#1a1a2e',isNew:true,isFree:true},
   {name:'Chemistry Master',sub:'HSC Board',emoji:'🧪',color:'#0f3443',isNew:false,isFree:false},
   {name:'Biology Digest',sub:'Full Syllabus',emoji:'🧬',color:'#14532d',isNew:true,isFree:true},
@@ -1672,7 +1741,7 @@ const BOOKS = [
   {name:'Biology Lab',sub:'Practicals',emoji:'🔬',color:'#1a3d1a',isNew:false,isFree:false},
   {name:'Math Shortcuts',sub:'Competitive',emoji:'🧮',color:'#1a1a4d',isNew:true,isFree:false},
 ];
-const COURSES = [
+const DEFAULT_COURSES = [
   {name:'Physics Complete Batch',sub:'Chapter 1–12',teacher:'Md. Riaz Sir',emoji:'⚛️',color:'#1a1a2e',lessons:42,price:0,isPremium:false,isFeature:true},
   {name:'Chemistry Masterclass',sub:'Organic Focus',teacher:'Nadia Ma\'am',emoji:'🧪',color:'#0f3443',lessons:36,price:299,orig:599,isPremium:true,isFeature:true},
   {name:'Math Problem Solving',sub:'Board + Creative',teacher:'Alam Sir',emoji:'📐',color:'#2d1b69',lessons:28,price:0,isPremium:false,isFeature:false},
@@ -1680,7 +1749,7 @@ const COURSES = [
   {name:'ICT Full Course',sub:'Code to Exam',teacher:'Tanvir Sir',emoji:'💻',color:'#0c1445',lessons:55,price:499,orig:999,isPremium:true,isFeature:false},
   {name:'English Communication',sub:'C1 Level',teacher:'Sara Ma\'am',emoji:'📖',color:'#44182b',lessons:24,price:199,orig:399,isPremium:true,isFeature:true},
 ];
-const INSTS = [
+const DEFAULT_INSTS = [
   {name:'Tejgaon Govt. High School',sub:'Dhaka · Public School',emoji:'🏫',color:'#1a2e1a',following:true,students:1240,exams:86,announcements:14},
   {name:'Milestone College',sub:'Uttara, Dhaka',emoji:'🎓',color:'#1a1a2e',following:false,students:3800,exams:214,announcements:42},
   {name:'Dhaka Residential Model',sub:'DRMC · Elite Institution',emoji:'🏛️',color:'#2d1b00',following:true,students:2100,exams:178,announcements:29},
@@ -1692,13 +1761,158 @@ const RECENT_EXAMS = [
   {name:'Chemistry Board Model',sub:'Chemistry',date:'Jun 24',score:61,cls:'sc-m',icon:'biotech'},
   {name:'Math Full CQ Set',sub:'Math',date:'Jun 21',score:44,cls:'sc-b',icon:'calculate'},
 ];
-const FAQS = [
+const WRONG_ANSWERS = [
+  {q:'What is the SI unit of electric charge?',subject:'Physics',chapter:'Electricity',date:'Jun 27',your:'Ampere',correct:'Coulomb'},
+  {q:'Which gas is released during photosynthesis?',subject:'Biology',chapter:'Photosynthesis',date:'Jun 24',your:'Carbon dioxide',correct:'Oxygen'},
+  {q:'Solve: derivative of sin(x) is —',subject:'Mathematics',chapter:'Calculus I',date:'Jun 21',your:'-cos(x)',correct:'cos(x)'},
+  {q:'Which bond involves sharing of electron pairs?',subject:'Chemistry',chapter:'Chemical Bonds',date:'Jun 18',your:'Ionic bond',correct:'Covalent bond'},
+];
+const SKIPPED_ANSWERS = [
+  {q:'Explain the working principle of a transformer.',subject:'Physics',chapter:'Electricity',date:'Jun 27'},
+  {q:'Describe the Krebs cycle in brief.',subject:'Biology',chapter:'Respiration',date:'Jun 24'},
+  {q:'Find the integral of 1/x dx.',subject:'Mathematics',chapter:'Calculus II',date:'Jun 21'},
+];
+const DEFAULT_FAQS = [
   {q:'How does the streak work?',a:'Study at least one topic or take at least one exam per day to maintain your streak. Missing a day resets it.'},
   {q:'Can I retake a live exam later?',a:'Live exams are not available for retake once the window closes. However, the same exam may appear in your practice bank.'},
   {q:'How is my rank calculated?',a:'Your rank is based on total points earned across all completed exams in the current season, updated every 30 minutes.'},
   {q:'What is the difference between MCQ and CQ?',a:'MCQ (Multiple Choice Questions) are single-answer questions. CQ (Creative Questions) require written structured answers in 4 parts.'},
   {q:'How do I follow a teacher or institution?',a:'Go to the Institutions or Teacher Profiles tab, find them, and tap Follow. Their exams and announcements will appear in your feed.'},
 ];
+
+// ── Question bank seed generator ──────────────────────────
+// Produces placeholder MCQ/CQ/SQ entries per subject/chapter so the
+// app has real, editable question data instead of an empty bank.
+// Replace these through Admin Panel → Questions.
+function buildDefaultQBank() {
+  const qb = {};
+  DEFAULT_SUBJECTS.forEach(s => {
+    qb[s.name] = {};
+    s.chapters.forEach(ch => {
+      const mcq = [], cq = [], sq = [];
+      for (let i = 1; i <= 5; i++) {
+        mcq.push({
+          id: 'mcq_' + s.name.slice(0,3).toLowerCase() + '_' + ch.replace(/\W+/g,'').slice(0,6).toLowerCase() + '_' + i,
+          q: `[Sample] ${ch} — question ${i}: which statement best describes this topic?`,
+          opts: [`Option A for ${ch} Q${i}`, `Option B for ${ch} Q${i}`, `Option C for ${ch} Q${i}`, `Option D for ${ch} Q${i}`],
+          ans: 0,
+        });
+      }
+      for (let i = 1; i <= 2; i++) {
+        cq.push({
+          id: 'cq_' + s.name.slice(0,3).toLowerCase() + '_' + ch.replace(/\W+/g,'').slice(0,6).toLowerCase() + '_' + i,
+          stem: `[Sample] ${ch} — stimulus/passage ${i} goes here.`,
+          ka: `State a key term related to ${ch}.`,
+          kha: `Explain a concept from ${ch} in your own words.`,
+          ga: `Analyse how a principle of ${ch} applies to a given scenario.`,
+          gha: `Evaluate/judge the significance of ${ch} using the stimulus above.`,
+        });
+      }
+      for (let i = 1; i <= 3; i++) {
+        sq.push({
+          id: 'sq_' + s.name.slice(0,3).toLowerCase() + '_' + ch.replace(/\W+/g,'').slice(0,6).toLowerCase() + '_' + i,
+          q: `[Sample] Briefly answer: a short question about ${ch} (#${i}).`,
+          ans: `Sample short answer for ${ch} #${i}.`,
+        });
+      }
+      qb[s.name][ch] = { mcq, cq, sq };
+    });
+  });
+  return qb;
+}
+
+// ── Store load / save ─────────────────────────────────────
+let SUBJECTS, NAMES, SCORES, BANNERS, BOOKS, COURSES, INSTS, FAQS, QBANK;
+
+function loadAdminStore() {
+  let raw = null;
+  try { raw = JSON.parse(localStorage.getItem(ER_STORE_KEY) || 'null'); } catch(e) { raw = null; }
+  SUBJECTS = (raw && raw.subjects) || JSON.parse(JSON.stringify(DEFAULT_SUBJECTS));
+  NAMES    = (raw && raw.names)    || DEFAULT_NAMES.slice();
+  SCORES   = (raw && raw.scores)   || DEFAULT_SCORES.slice();
+  BANNERS  = (raw && raw.banners)  || JSON.parse(JSON.stringify(DEFAULT_BANNERS));
+  BOOKS    = (raw && raw.books)    || JSON.parse(JSON.stringify(DEFAULT_BOOKS));
+  COURSES  = (raw && raw.courses)  || JSON.parse(JSON.stringify(DEFAULT_COURSES));
+  INSTS    = (raw && raw.insts)    || JSON.parse(JSON.stringify(DEFAULT_INSTS));
+  FAQS     = (raw && raw.faqs)     || JSON.parse(JSON.stringify(DEFAULT_FAQS));
+  QBANK    = (raw && raw.qbank)    || buildDefaultQBank();
+  recomputeMcqBank();
+  if (!raw) saveAdminStore(false);
+}
+function saveAdminStore(doRerender) {
+  try {
+    localStorage.setItem(ER_STORE_KEY, JSON.stringify({
+      subjects: SUBJECTS, names: NAMES, scores: SCORES, banners: BANNERS,
+      books: BOOKS, courses: COURSES, insts: INSTS, faqs: FAQS, qbank: QBANK
+    }));
+  } catch(e) { /* storage unavailable — edits stay in-memory for this session */ }
+  if (doRerender !== false) rerenderAllData();
+}
+// Total MCQ count per subject, drawn from the live question bank —
+// this is what feeds the exam setup screens and subject cards.
+function recomputeMcqBank() {
+  SUBJECTS.forEach(s => {
+    let total = 0;
+    const chMap = QBANK[s.name] || {};
+    (s.chapters || []).forEach(ch => { total += (chMap[ch] && chMap[ch].mcq ? chMap[ch].mcq.length : 0); });
+    s.mcqBank = total;
+  });
+}
+function rerenderAllData() {
+  renderHome(); renderExam(); renderBooks(); renderCourses(); renderInstitutions(); renderLbFull(); renderProfile();
+}
+loadAdminStore();
+
+/* ═══════════════════════════════════════
+   PROFILE (personal identity — separate key
+   from the admin content store, since only
+   this app edits it, never admin.html)
+═══════════════════════════════════════ */
+const ER_PROFILE_KEY = 'er_profile_v1';
+let PROFILE = { name: 'Arafat Rahman', sub: "HSC '28 · Science · Tejgaon Govt. High School", avatar: '' };
+function loadProfile() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(ER_PROFILE_KEY) || 'null');
+    if (raw) PROFILE = Object.assign(PROFILE, raw);
+  } catch(e) { /* keep defaults */ }
+}
+function saveProfile() {
+  try { localStorage.setItem(ER_PROFILE_KEY, JSON.stringify(PROFILE)); } catch(e) {}
+  renderAvatars();
+}
+// Renders PROFILE into every place it appears — island + profile hero —
+// so updating it once (via Edit Profile) syncs everywhere automatically.
+function renderAvatars() {
+  const initial = (PROFILE.name || 'A').trim().charAt(0).toUpperCase() || 'A';
+  [['islandAvatar', ''], ['profileAvatar', '']].forEach(([id]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = PROFILE.avatar
+      ? `<img src="${PROFILE.avatar}" alt="${initial}" style="width:100%;height:100%;border-radius:50%;object-fit:cover" onerror="this.parentElement.textContent='${initial}'">`
+      : initial;
+  });
+  const nameEls = ['islandName', 'profileName'];
+  nameEls.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = PROFILE.name; });
+  const subEls = ['islandClass', 'profileSub'];
+  subEls.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = PROFILE.sub; });
+}
+function openEditProfile() {
+  document.getElementById('efName').value = PROFILE.name;
+  document.getElementById('efSub').value = PROFILE.sub;
+  document.getElementById('efAvatar').value = PROFILE.avatar;
+  openModal('editProfileModal');
+}
+function saveEditProfile() {
+  const name = document.getElementById('efName').value.trim();
+  if (!name) { showToast('Name is required'); return; }
+  PROFILE.name = name;
+  PROFILE.sub = document.getElementById('efSub').value.trim();
+  PROFILE.avatar = document.getElementById('efAvatar').value.trim();
+  saveProfile();
+  closeModal('editProfileModal');
+  showToast('Profile updated');
+}
+loadProfile();
 
 /* ═══════════════════════════════════════
    HOME RENDERING
@@ -1738,34 +1952,6 @@ function renderHome() {
         ${youTag}
       </div>`;
   }).join('');
-
-  // ── Subject Progress ────────────────────────────────────
-  document.getElementById('homeProgressList').innerHTML = SUBJECTS.map(s => `
-    <div class="prog-wrap">
-      <div class="prog-hd">
-        <div class="prog-label">
-          <span class="mi material-icons-round">radio_button_checked</span>${s.name}
-        </div>
-        <span class="prog-pct">${s.pct}%</span>
-      </div>
-      <div class="prog-bg">
-        <div class="prog-fill" style="width:${s.pct}%"></div>
-      </div>
-    </div>`).join('');
-
-  // ── Recent Exams ────────────────────────────────────────
-  document.getElementById('homeRecentExams').innerHTML = RECENT_EXAMS.map(e => `
-    <div class="ex-row">
-      <div class="ex-ico"><span class="mi material-icons-round">${e.icon}</span></div>
-      <div class="ex-info">
-        <div class="ex-nm">${e.name}</div>
-        <div class="ex-mt">${e.sub} · ${e.date}</div>
-      </div>
-      <div class="ex-sc ${e.cls}">${e.score}%</div>
-      <button class="retake-btn" onclick="event.stopPropagation();showToast('Loading ${e.name}…')">
-        <span class="mi material-icons-round">replay</span>Retake
-      </button>
-    </div>`).join('');
 
   // ── Recommended ─────────────────────────────────────────
   const recs = [
@@ -1870,16 +2056,47 @@ function renderExam() {
   ).join('');
   renderTestPapers(TEST_PAPERS);
 
-  // Recent attempts
-  document.getElementById('examRecentList').innerHTML = RECENT_EXAMS.map(e=>`
-    <div class="ex-row">
-      <div class="ex-ico"><span class="mi material-icons-round">${e.icon}</span></div>
-      <div class="ex-info"><div class="ex-nm">${e.name}</div><div class="ex-mt">${e.sub} · ${e.date}</div></div>
-      <div class="ex-sc ${e.cls}">${e.score}%</div>
-      <button class="retake-btn" onclick="event.stopPropagation();retakeExam('${e.name}')">
-        <span class="mi material-icons-round">replay</span>Retake
-      </button>
-    </div>`).join('');
+  // History tab
+  document.getElementById('histSubTabs').innerHTML = [
+    ['recent','Recent Exam'],['wrong','Wrong Answers'],['skipped','Skipped Answers']
+  ].map(([id,lb],i)=>`<div class="tp-chip ${i===0?'active':''}" onclick="switchHistTab('${id}',this)">${lb}</div>`).join('');
+  switchHistTab('recent');
+}
+let histActiveTab = 'recent';
+function switchHistTab(tab, el) {
+  histActiveTab = tab;
+  if (el) { document.querySelectorAll('#histSubTabs .tp-chip').forEach(c=>c.classList.remove('active')); el.classList.add('active'); }
+  const box = document.getElementById('histContent');
+  if (tab === 'recent') {
+    box.innerHTML = RECENT_EXAMS.length ? RECENT_EXAMS.map(e=>`
+      <div class="ex-row">
+        <div class="ex-ico"><span class="mi material-icons-round">${e.icon}</span></div>
+        <div class="ex-info"><div class="ex-nm">${e.name}</div><div class="ex-mt">${e.sub} · ${e.date}</div></div>
+        <div class="ex-sc ${e.cls}">${e.score}%</div>
+        <button class="retake-btn" onclick="event.stopPropagation();retakeExam('${e.name}')">
+          <span class="mi material-icons-round">replay</span>Retake
+        </button>
+      </div>`).join('') : `<div style="text-align:center;padding:32px 20px;color:var(--tm)">No recent exams yet.</div>`;
+  } else if (tab === 'wrong') {
+    box.innerHTML = WRONG_ANSWERS.length ? WRONG_ANSWERS.map(w=>`
+      <div class="wrong-item">
+        <div class="wrong-ico"><span class="mi material-icons-round">close</span></div>
+        <div class="wrong-body">
+          <div class="wrong-q">${w.q}</div>
+          <div class="wrong-meta">${w.subject} · ${w.chapter} · ${w.date}</div>
+          <div class="wrong-ans-row"><span class="your">Your answer: ${w.your}</span><span class="correct">Correct: ${w.correct}</span></div>
+        </div>
+      </div>`).join('') : `<div style="text-align:center;padding:32px 20px;color:var(--tm)">No wrong answers logged yet.</div>`;
+  } else {
+    box.innerHTML = SKIPPED_ANSWERS.length ? SKIPPED_ANSWERS.map(sk=>`
+      <div class="skip-item">
+        <div class="skip-ico"><span class="mi material-icons-round">redo</span></div>
+        <div class="skip-body">
+          <div class="skip-q">${sk.q}</div>
+          <div class="skip-meta">${sk.subject} · ${sk.chapter} · ${sk.date}</div>
+        </div>
+      </div>`).join('') : `<div style="text-align:center;padding:32px 20px;color:var(--tm)">No skipped questions.</div>`;
+  }
 }
 
 /* ── Test Papers ──────────────────────────────────────────── */
@@ -2279,15 +2496,6 @@ function drawProfileChart() {
 /* Results page content */
 function renderResults() {
   document.getElementById('resultProgressList').innerHTML = SUBJECTS.map(s=>`<div class="prog-wrap"><div class="prog-hd"><div class="prog-label"><span class="mi material-icons-round">science</span>${s.name}</div><span class="prog-pct">${s.pct}%</span></div><div class="prog-bg"><div class="prog-fill" style="width:${s.pct}%"></div></div></div>`).join('');
-  const history = [
-    {name:'Physics MCQ Mock',date:'Jun 27',score:82,emoji:'⚛️',cls:'sc-g'},
-    {name:'Chemistry Board',date:'Jun 24',score:61,emoji:'🧪',cls:'sc-m'},
-    {name:'Math Full CQ',date:'Jun 21',score:44,emoji:'📐',cls:'sc-b'},
-    {name:'Biology Chapter 5',date:'Jun 18',score:91,emoji:'🧬',cls:'sc-g'},
-    {name:'English Grammar',date:'Jun 15',score:78,emoji:'📖',cls:'sc-g'},
-    {name:'ICT Mock Test',date:'Jun 12',score:95,emoji:'💻',cls:'sc-g'},
-  ];
-  document.getElementById('examHistoryList').innerHTML = history.map(h=>`<div class="hist-item"><div class="hist-av" style="background:var(--surf2)">${h.emoji}</div><div class="hist-info"><div class="hist-nm">${h.name}</div><div class="hist-mt">${h.date} · HSC Board Style</div></div><div class="hist-sc ${h.cls}">${h.score}%</div><button class="retake-btn" onclick="showToast('Loading...')"><span class="mi material-icons-round">replay</span></button></div>`).join('');
 }
 
 /* ═══════════════════════════════════════
@@ -2314,15 +2522,15 @@ function renderProfile() {
   document.getElementById('achievementList').innerHTML = achs.map(a=>`<div class="ach-item"><div class="ach-icon">${a.emoji}</div><div class="ach-info"><div class="ach-nm">${a.nm}</div><div class="ach-desc">${a.desc}</div>${a.p<100?`<div class="prog-bg ach-prog" style="margin-top:6px"><div class="prog-fill" style="width:${a.p}%"></div></div>`:'<div style="margin-top:5px"><span class="pill pill-ok" style="font-size:10px">Completed ✓</span></div>'}</div></div>`).join('');
 
   document.getElementById('appearanceSettings').innerHTML = [
-    {ico:'dark_mode',bg:'#EEF2FF',col:'#3B82F6',nm:'Theme',sub:'Light / Dark mode',right:'toggle'},
     {ico:'translate',bg:'#FFF8D6',col:'#B8860B',nm:'Language',sub:'English / বাংলা',right:'chevron'},
     {ico:'text_fields',bg:'#ECFDF5',col:'#16A34A',nm:'Font Size',sub:'Normal',right:'chevron'},
   ].map(s=>settingRow(s)).join('');
 
   document.getElementById('accountSettings').innerHTML = [
-    {ico:'person',bg:'#EEF2FF',col:'#3B82F6',nm:'Edit Profile',sub:'Name, photo, class',right:'chevron'},
+    {ico:'person',bg:'#EEF2FF',col:'#3B82F6',nm:'Edit Profile',sub:'Name, photo, class',right:'chevron',action:'openEditProfile()'},
     {ico:'notifications',bg:'#FFF8D6',col:'#B8860B',nm:'Notifications',sub:'Exam reminders, scores',right:'chevron'},
     {ico:'lock',bg:'#FFE8E8',col:'#DC2626',nm:'Change Password',sub:'Last changed 3 months ago',right:'chevron'},
+    {ico:'admin_panel_settings',bg:'#FFF8D6',col:'#B8860B',nm:'Admin Panel',sub:'Manage banners, questions, content',right:'chevron',action:"window.location.href='admin.html'"},
     {ico:'logout',bg:'#F0F0F0',col:'#6B7280',nm:'Sign Out',sub:'',right:'chevron'},
   ].map(s=>settingRow(s)).join('');
 
@@ -2344,7 +2552,7 @@ function settingRow(s) {
          <div class="toggle-slider"></div>
        </label>`
     : `<span class="mi material-icons-round" style="color:var(--tm)">chevron_right</span>`;
-  return `<div class="setting-row" onclick="showToast('Opening ${s.nm}...')">
+  return `<div class="setting-row" onclick="${s.action ? s.action : `showToast('Opening ${s.nm}...')`}">
     <div class="setting-ico" style="background:${s.bg}"><span class="mi material-icons-round" style="color:${s.col}">${s.ico}</span></div>
     <div class="setting-info"><div class="setting-nm">${s.nm}</div>${s.sub?`<div class="setting-sub">${s.sub}</div>`:''}</div>
     <div class="setting-right">${right}</div>
@@ -2411,7 +2619,34 @@ function setLbFilter(el, filter) {
   renderLbFull();
 }
 function renderLbFull() {
-  document.getElementById('lbFullList').innerHTML = NAMES.map((n,i)=>`<div class="lb-list-row"><span class="lb-list-n">${i+1}</span><div class="lb-list-av">${n[0]}</div><div class="lb-list-nm">${n}<br><span style="font-size:11px;color:var(--tm);font-weight:400">HSC '27</span></div><div class="lb-list-sc">${SCORES[i].toLocaleString()}</div></div>`).join('');
+  // Podium — top 3
+  const medal = ['1','2','3'];
+  document.getElementById('lbPodium').innerHTML = [1,0,2].map(i => {
+    const rank = i + 1;
+    return `<div class="lb-pod-slot p${rank}">
+      <div class="lb-pod-av">${NAMES[i][0]}<span class="lb-pod-medal">${medal[i]}</span></div>
+      <div class="lb-pod-nm">${NAMES[i]}</div>
+      <div class="lb-pod-pts">${SCORES[i].toLocaleString()} pts</div>
+      <div class="lb-pod-bar"></div>
+    </div>`;
+  }).join('');
+
+  // Full ranked list — insert "You" at your logical rank (#47) like the home widget
+  const rows = NAMES.map((n,i) => ({ n, pts: SCORES[i], rank: i + 1, isMe: false }));
+  rows.push({ n: PROFILE.name || 'You', pts: 7340, rank: 47, isMe: true });
+  rows.sort((a,b) => a.rank - b.rank);
+
+  document.getElementById('lbFullList').innerHTML = rows.map(r => `
+    <div class="lb-list-row ${r.isMe?'is-me':''}" id="${r.isMe?'lbMyRow':''}">
+      <span class="lb-list-n">${r.rank}</span>
+      <div class="lb-list-av">${r.n[0]}</div>
+      <div class="lb-list-nm">${r.n}${r.isMe?' <span style="color:var(--y-dark)">(You)</span>':''}<br><span style="font-size:11px;color:var(--tm);font-weight:400">HSC '27</span></div>
+      <div class="lb-list-sc">${r.pts.toLocaleString()}</div>
+    </div>`).join('');
+}
+function jumpToMyRank() {
+  const el = document.getElementById('lbMyRow');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 /* ═══════════════════════════════════════
@@ -2420,6 +2655,7 @@ function renderLbFull() {
 function init() {
   // sync icons/toggle with the default dark theme (without re-flagging chartsDrawn)
   applyTheme(document.documentElement.dataset.theme === 'dark');
+  renderAvatars();
   renderHome();
   renderExam();
   renderResults();

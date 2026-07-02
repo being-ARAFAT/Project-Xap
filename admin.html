@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExamReady — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS — mirrored 1:1 from exam.html
+═══════════════════════════════════════════════════════════ */
+:root {
+  --y:          #F5C518;
+  --y-soft:     #FFF8D6;
+  --y-glow:     rgba(245,197,24,0.15);
+  --y-border:   rgba(245,197,24,0.32);
+  --y-dark:     #B8860B;
+
+  --bg:         #F4F5F9;
+  --surf:       #FFFFFF;
+  --surf2:      #EDEEF3;
+  --surf3:      #E4E5EC;
+  --border:     rgba(0,0,0,0.07);
+  --tp:         #111114;
+  --ts:         #6B7280;
+  --tm:         #9CA3AF;
+
+  --ok:         #22C55E;
+  --warn:       #F59E0B;
+  --err:        #EF4444;
+  --info:       #3B82F6;
+
+  --glass:      rgba(255,255,255,0.72);
+  --blur:       saturate(180%) blur(20px);
+
+  --sh-sm:      0 2px 8px rgba(0,0,0,0.06);
+  --sh-md:      0 4px 20px rgba(0,0,0,0.09);
+  --sh-lg:      0 8px 40px rgba(0,0,0,0.13);
+
+  --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 28px; --r-pill: 999px;
+}
+[data-theme="dark"] {
+  --bg:       #0C0C10;
+  --surf:     #17171C;
+  --surf2:    #1F1F26;
+  --surf3:    #27272F;
+  --border:   rgba(255,255,255,0.07);
+  --tp:       #F0F0F4;
+  --ts:       #9CA3AF;
+  --tm:       #6B7280;
+  --glass:    rgba(16,16,22,0.78);
+  --y-soft:   rgba(245,197,24,0.1);
+  --y-border: rgba(245,197,24,0.22);
+  --y-dark:   #F5C518;
+  --sh-sm:    0 2px 8px rgba(0,0,0,0.35);
+  --sh-md:    0 4px 20px rgba(0,0,0,0.45);
+  --sh-lg:    0 8px 40px rgba(0,0,0,0.6);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tp);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+button{border:none;cursor:pointer;background:none;font-family:inherit;color:inherit}
+a{text-decoration:none;color:inherit}
+input,select,textarea{font-family:inherit}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 0 60px;animation:fadeUp .32s cubic-bezier(.22,1,.36,1) both}
+
+/* Topbar */
+.top-bar{
+  position:sticky;top:0;z-index:800;
+  background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border-bottom:1px solid var(--border);
+  padding:12px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.top-bar-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;flex:1}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--surf2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ts);transition:all .2s;flex-shrink:0;
+}
+.icon-btn:hover{background:var(--y);color:#000}
+.icon-btn .mi{font-size:19px}
+
+/* Card / buttons / pills — mirrored from exam.html */
+.card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden}
+.btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 24px;border-radius:var(--r-md);
+  background:var(--y);color:#000;
+  font-size:14px;font-weight:700;
+  box-shadow:0 4px 14px rgba(245,197,24,.35);
+  transition:all .2s;cursor:pointer;border:none;width:100%;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,197,24,.45)}
+.btn-primary:active{transform:scale(.98)}
+.btn-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 20px;border-radius:var(--r-md);
+  background:var(--surf2);border:1px solid var(--border);
+  font-size:14px;font-weight:700;color:var(--ts);
+  transition:all .2s;cursor:pointer;width:100%;
+}
+.btn-secondary:hover{border-color:var(--y);color:var(--y-dark)}
+[data-theme="dark"] .btn-secondary:hover{color:var(--y)}
+
+/* Modal base — mirrored from exam.html */
+.modal{
+  position:fixed;inset:0;z-index:7000;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal.open{opacity:1;pointer-events:all}
+.modal-sheet{
+  background:var(--surf);
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  width:min(720px,100vw);
+  max-height:90vh;overflow-y:auto;
+  padding:20px 20px max(24px,env(safe-area-inset-bottom));
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);
+}
+.modal.open .modal-sheet{transform:translateY(0)}
+.modal-handle{width:36px;height:4px;background:var(--surf3);border-radius:2px;margin:0 auto 18px}
+.modal-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;margin-bottom:16px}
+
+/* Toast — mirrored from exam.html */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);
+  background:var(--tp);color:var(--bg);
+  padding:11px 20px;border-radius:var(--r-pill);
+  font-size:13px;font-weight:600;
+  opacity:0;pointer-events:none;transition:all .28s;z-index:9999;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ═══════════════════════════════════════════════════════════
+   PIN GATE SCREEN
+═══════════════════════════════════════════════════════════ */
+.gate-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.gate-topbar{position:fixed;top:0;left:0;right:0;padding:16px;display:flex;justify-content:space-between}
+.gate-card{
+  background:var(--surf);border:1px solid var(--border);border-radius:var(--r-xl);
+  box-shadow:var(--sh-lg);padding:32px 26px;width:100%;max-width:400px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.gate-card::before{content:'';position:absolute;top:-60%;right:-30%;width:220px;height:220px;background:var(--y-glow);border-radius:50%;filter:blur(40px);pointer-events:none}
+.adm-gate-icon{width:60px;height:60px;border-radius:var(--r-md);background:var(--y-soft);border:1px solid var(--y-border);display:flex;align-items:center;justify-content:center;color:var(--y-dark);margin:0 auto 16px}
+[data-theme="dark"] .adm-gate-icon{color:var(--y)}
+.adm-gate-icon .mi{font-size:28px}
+.gate-title{font-family:'Sora',sans-serif;font-weight:800;font-size:21px;margin-bottom:6px}
+.gate-sub{font-size:13px;color:var(--ts);line-height:1.5;margin-bottom:22px}
+.adm-pin-input{letter-spacing:8px;font-size:22px;text-align:center;font-weight:800}
+.gate-hint{font-size:11px;color:var(--tm);margin-top:16px}
+
+/* ═══════════════════════════════════════════════════════════
+   ADMIN COMPONENTS
+═══════════════════════════════════════════════════════════ */
+.std-input,.std-textarea,.std-select{
+  width:100%;background:var(--surf2);border:1.5px solid var(--border);border-radius:var(--r-md);
+  padding:12px 13px;font-size:14px;font-weight:600;color:var(--tp);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.std-textarea{font-weight:500;resize:vertical;min-height:64px;line-height:1.5}
+.std-input:focus,.std-textarea:focus,.std-select:focus{border-color:var(--y);box-shadow:0 0 0 3px var(--y-glow)}
+.std-input::placeholder,.std-textarea::placeholder{color:var(--tm);font-weight:500}
+.std-select{appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;cursor:pointer;
+}
+.adm-flabel{font-size:12px;font-weight:700;color:var(--ts);margin-bottom:6px;display:block}
+.adm-fgroup{margin-bottom:14px}
+.adm-frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.adm-tabs{display:flex;gap:8px;overflow-x:auto;padding:14px 16px 12px;scrollbar-width:none}
+.adm-tabs::-webkit-scrollbar{display:none}
+.adm-tab{padding:8px 15px;border-radius:var(--r-pill);font-size:12.5px;font-weight:700;background:var(--surf);border:1px solid var(--border);color:var(--ts);cursor:pointer;flex-shrink:0;transition:all .18s;white-space:nowrap}
+.adm-tab.active{background:var(--y);color:#000;border-color:var(--y)}
+
+.adm-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border)}
+.adm-row:last-child{border-bottom:none}
+.adm-row-ico{width:38px;height:38px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;background:var(--surf2)}
+.adm-row-info{flex:1;min-width:0}
+.adm-row-nm{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-row-sub{font-size:11.5px;color:var(--tm);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-row-acts{display:flex;gap:6px;flex-shrink:0}
+.adm-mini-btn{width:32px;height:32px;border-radius:50%;background:var(--surf2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ts);transition:all .18s}
+.adm-mini-btn:hover{background:var(--y);color:#000}
+.adm-mini-btn.danger:hover{background:var(--err);color:#fff}
+.adm-mini-btn .mi{font-size:16px}
+
+.adm-toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;gap:10px}
+.adm-toolbar .adm-count{font-size:12px;color:var(--tm);font-weight:600}
+.adm-add-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r-pill);background:var(--y);color:#000;font-size:12.5px;font-weight:700;flex-shrink:0}
+.adm-add-btn .mi{font-size:16px}
+
+.adm-empty{padding:34px 16px;text-align:center;color:var(--tm);font-size:13px}
+
+.adm-mcq-opt{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.adm-mcq-opt input[type="radio"]{width:18px;height:18px;accent-color:var(--y);flex-shrink:0}
+.adm-mcq-opt input[type="text"]{flex:1}
+
+.dup-warn-box{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:var(--r-md);padding:12px 14px;margin-bottom:14px;display:flex;gap:10px}
+.dup-warn-box .mi{color:var(--warn);font-size:20px;flex-shrink:0}
+.dup-match-item{background:var(--surf2);border-radius:var(--r-sm);padding:10px 12px;margin-bottom:8px;font-size:12.5px}
+.dup-match-pct{font-weight:800;color:var(--warn);float:right}
+
+.adm-chip-row{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 14px}
+.adm-chip{padding:7px 13px;border-radius:var(--r-pill);font-size:12px;font-weight:700;background:var(--surf2);border:1px solid var(--border);color:var(--ts);display:flex;align-items:center;gap:6px;cursor:pointer}
+.adm-chip.active{background:var(--y);color:#000;border-color:var(--y)}
+
+.adm-bottom-note{padding:16px;text-align:center;font-size:11.5px;color:var(--tm);line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════
+     PIN GATE
+═══════════════════════════════════ -->
+<div class="gate-screen" id="gateScreen">
+  <div class="gate-topbar">
+    <a class="icon-btn" href="exam.html" title="Back to app"><span class="mi material-icons-round">arrow_back</span></a>
+    <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme"><span class="mi material-icons-round" id="themeIcon">light_mode</span></button>
+  </div>
+  <div class="gate-card">
+    <div class="adm-gate-icon"><span class="mi material-icons-round">admin_panel_settings</span></div>
+    <div class="gate-title">Admin Access</div>
+    <div class="gate-sub">Enter your admin PIN to manage banners, subjects, questions and every other editable feature in ExamReady.</div>
+    <input type="password" inputmode="numeric" maxlength="6" class="std-input adm-pin-input" id="adminPinInput" placeholder="••••" onkeydown="if(event.key==='Enter')submitAdminPin()">
+    <div id="adminPinErr" style="display:none;color:var(--err);font-size:12px;font-weight:600;margin-top:10px">Incorrect PIN. Try again.</div>
+    <div style="margin-top:18px"><button class="btn-primary" onclick="submitAdminPin()">Unlock Panel</button></div>
+    <div class="gate-hint">Default PIN is <b>2026</b> — change it anytime once unlocked.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ADMIN SHELL
+═══════════════════════════════════ -->
+<div class="wrap" id="adminShell" style="display:none">
+  <div class="top-bar">
+    <a class="icon-btn" href="exam.html" title="Back to app"><span class="mi material-icons-round">arrow_back</span></a>
+    <span class="top-bar-title">Admin Panel</span>
+    <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme"><span class="mi material-icons-round" id="themeIconShell">light_mode</span></button>
+    <button class="icon-btn" onclick="openAdminPinChange()" title="Change PIN"><span class="mi material-icons-round">key</span></button>
+    <button class="icon-btn" onclick="adminResetDefaults()" title="Reset to defaults"><span class="mi material-icons-round">restart_alt</span></button>
+  </div>
+  <div class="adm-tabs" id="adminTabs"></div>
+  <div id="adminTabContent"></div>
+  <div class="adm-bottom-note">Changes save instantly to this device and appear next time the ExamReady app is opened here.</div>
+</div>
+
+<!-- ── ADMIN ITEM EDITOR MODAL (generic, reused by all sections) ── -->
+<div class="modal" id="adminItemModal">
+  <div class="modal-sheet" style="max-width:520px">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="adminItemModalTitle">Edit Item</div>
+    <div id="adminItemModalBody"></div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-secondary" style="flex:1" onclick="closeModal('adminItemModal')">Cancel</button>
+      <button class="btn-primary" style="flex:2" id="adminItemModalSaveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DUPLICATE QUESTION WARNING MODAL ── -->
+<div class="modal" id="dupWarnModal">
+  <div class="modal-sheet" style="max-width:520px">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Possible Duplicate</div>
+    <div class="dup-warn-box">
+      <span class="mi material-icons-round">warning</span>
+      <div style="font-size:12.5px;color:var(--ts);line-height:1.5">This question looks similar to existing entries in the same chapter. Review the matches below before saving.</div>
+    </div>
+    <div id="dupMatchList"></div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-secondary" style="flex:1" onclick="closeModal('dupWarnModal')">Go Back &amp; Edit</button>
+      <button class="btn-primary" style="flex:2" id="dupSaveAnywayBtn">Save Anyway</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2400);
+}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ document.querySelectorAll('.modal.open').forEach(el=>el.classList.remove('open')); }});
+
+/* Theme (independent toggle, synced via localStorage like exam.html) */
+function applyTheme(dark){
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  const icon = dark ? 'light_mode' : 'dark_mode';
+  const a = document.getElementById('themeIcon'); if(a) a.textContent = icon;
+  const b = document.getElementById('themeIconShell'); if(b) b.textContent = icon;
+  try { localStorage.setItem('er_theme', dark ? 'dark' : 'light'); } catch(e){}
+}
+function toggleTheme(){ applyTheme(document.documentElement.dataset.theme !== 'dark'); }
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('er_theme'); } catch(e){}
+  applyTheme(saved !== 'light');
+})();
+</script>
+
+<script src="admin_data.js"></script>
+<script src="admin_module.js"></script>
+</body>
+</html>
